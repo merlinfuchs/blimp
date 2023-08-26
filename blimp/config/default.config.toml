@@ -5,13 +5,13 @@ layout = [
 ]
 
 [views.latency]
-update_interval = 500
+update_interval = 500 # 0.5 seconds
 target_host = "www.google.com"
 
 [views.status]
-update_interval = 10000
+update_interval = 10000 # 10 seconds
 
 [views.weather]
-update_interval = 600000
+update_interval = 600000 # 10 minutes
 owm_language = "en"
 owm_unit = "metric"
