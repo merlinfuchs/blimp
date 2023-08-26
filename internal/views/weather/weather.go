@@ -5,8 +5,8 @@ import (
 	"time"
 
 	"github.com/gdamore/tcell/v2"
-	"github.com/merlinfuchs/blimp/blimp/config"
-	"github.com/merlinfuchs/blimp/blimp/views/weather/icons"
+	"github.com/merlinfuchs/blimp/internal/config"
+	"github.com/merlinfuchs/blimp/internal/views/weather/icons"
 	"github.com/rivo/tview"
 	"github.com/rs/zerolog/log"
 )
@@ -71,9 +71,11 @@ func (l *StatusView) updateData() {
 		return
 	}
 	l.forecastWeather = &forecastWeather
+
+	l.updateView()
 }
 
-func (l *StatusView) Update() error {
+func (l *StatusView) updateView() error {
 	l.view.Clear()
 
 	unitText := ""
@@ -177,5 +179,9 @@ func (l *StatusView) Update() error {
 		l.view.AddItem(grid, 0, 3, false)
 	}
 
+	return nil
+}
+
+func (l *StatusView) Update() error {
 	return nil
 }

@@ -8,7 +8,7 @@ import (
 	"github.com/rs/zerolog/log"
 
 	"github.com/gdamore/tcell/v2"
-	"github.com/merlinfuchs/blimp/blimp/config"
+	"github.com/merlinfuchs/blimp/internal/config"
 	"github.com/rivo/tview"
 )
 

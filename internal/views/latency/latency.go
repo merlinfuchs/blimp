@@ -5,13 +5,11 @@ import (
 
 	"github.com/gdamore/tcell/v2"
 	"github.com/guptarohit/asciigraph"
-	"github.com/merlinfuchs/blimp/blimp/config"
+	"github.com/merlinfuchs/blimp/internal/config"
 	ping "github.com/prometheus-community/pro-bing"
 	"github.com/rivo/tview"
 	"github.com/rs/zerolog/log"
 )
-
-const maxDataPoints = 50
 
 type LatencyView struct {
 	stopped chan struct{}
@@ -29,7 +27,7 @@ func New() *LatencyView {
 
 	return &LatencyView{
 		stopped: make(chan struct{}),
-		data:    make([]float64, maxDataPoints),
+		data:    make([]float64, config.K.Int("views.latency.history_length")),
 		view:    textView,
 	}
 }

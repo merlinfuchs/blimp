@@ -1,4 +1,4 @@
-package blimp
+package internal
 
 import "github.com/rivo/tview"
 

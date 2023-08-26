@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/merlinfuchs/blimp/blimp/config"
+	"github.com/merlinfuchs/blimp/internal/config"
 )
 
 type weatherMain struct {

@@ -6,11 +6,11 @@ import (
 	"github.com/gdamore/tcell/v2"
 	"github.com/rs/zerolog/log"
 
-	"github.com/merlinfuchs/blimp/blimp"
-	"github.com/merlinfuchs/blimp/blimp/config"
-	"github.com/merlinfuchs/blimp/blimp/views/latency"
-	"github.com/merlinfuchs/blimp/blimp/views/status"
-	"github.com/merlinfuchs/blimp/blimp/views/weather"
+	"github.com/merlinfuchs/blimp/internal"
+	"github.com/merlinfuchs/blimp/internal/config"
+	"github.com/merlinfuchs/blimp/internal/views/latency"
+	"github.com/merlinfuchs/blimp/internal/views/status"
+	"github.com/merlinfuchs/blimp/internal/views/weather"
 	"github.com/rivo/tview"
 )
 
@@ -19,7 +19,7 @@ func main() {
 
 	app := tview.NewApplication()
 
-	views := map[string]blimp.View{
+	views := map[string]internal.View{
 		"latency": latency.New(),
 		"status":  status.New(),
 		"weather": weather.New(),
@@ -99,7 +99,7 @@ func main() {
 				}
 			})
 
-			<-time.After(250 * time.Millisecond)
+			<-time.After(time.Duration(config.K.Int("update_interval")) * time.Millisecond)
 		}
 	}()
 

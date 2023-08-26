@@ -1,3 +1,5 @@
+update_interval = 250
+
 layout = [
     ["weather", "weather", "weather", "weather", "weather", "weather"],
     ["weather", "weather", "weather", "weather", "weather", "weather"],
@@ -6,6 +8,7 @@ layout = [
 
 [views.latency]
 update_interval = 500 # 0.5 seconds
+history_length = 25
 target_host = "www.google.com"
 
 [views.status]
