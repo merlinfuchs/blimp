@@ -47,8 +47,9 @@ type = "https"
 host = "eu-api.friendlycaptcha.eu"
 
 [views.weather]
+# You openweathermap.org API key
 owm_api_key = ""
+# The latitude and longitude of the weather location
 owm_lat = 51.33
 owm_lon = 12.37
-owm_location = "Leipzig"
 ```
