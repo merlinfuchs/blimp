@@ -55,3 +55,5 @@ owm_api_key = ""
 owm_lat = 51.33
 owm_lon = 12.37
 ```
+
+Look at the [default config](internal/config/default.config.toml) for other values you can override.
