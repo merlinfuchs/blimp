@@ -3,6 +3,7 @@ update_interval = 250
 layout = [
     ["weather", "weather"],
     ["weather", "weather"],
+    ["feeds", "feeds"],
     ["latency", "status"]
 ]
 
