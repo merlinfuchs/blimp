@@ -31,7 +31,7 @@ The app will look for a configuration file called `blimp.toml`. Here is an examp
 layout = [
     ["weather", "weather"],
     ["weather", "weather"],
-    ["feeds", "feeds"]
+    ["feeds", "feeds"],
     ["latency", "status"]
 ]
 
