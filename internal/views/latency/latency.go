@@ -33,13 +33,18 @@ func New() *LatencyView {
 }
 
 func (l *LatencyView) Start() {
-	go func() {
-		pinger, err := ping.NewPinger(config.K.String("views.latency.target_host"))
-		if err != nil {
-			log.Fatal().Err(err).Msgf("Failed to create pinger, latency won't be displayed")
-			return
-		}
+	pinger, err := ping.NewPinger(config.K.String("views.latency.target_host"))
+	if err != nil {
+		log.Fatal().Err(err).Msgf("Failed to create pinger, latency won't be displayed")
+		return
+	}
 
+	go func() {
+		<-l.stopped
+		pinger.Stop()
+	}()
+
+	go func() {
 		pinger.SetPrivileged(false)
 		pinger.Interval = time.Duration(config.K.Int("views.latency.update_interval")) * time.Millisecond
 
