@@ -48,6 +48,11 @@ name = "Friendly Captcha API"
 type = "https"
 host = "eu-api.friendlycaptcha.eu"
 
+[[views.status.targets]]
+name = "Google DNS"
+type = "ping"
+host = "8.8.8.8"
+
 [views.weather]
 # You openweathermap.org API key
 owm_api_key = ""

@@ -1,6 +1,7 @@
 package status
 
 import (
+	"context"
 	"fmt"
 	"net/http"
 	"time"
@@ -9,6 +10,7 @@ import (
 
 	"github.com/gdamore/tcell/v2"
 	"github.com/merlinfuchs/blimp/internal/config"
+	ping "github.com/prometheus-community/pro-bing"
 	"github.com/rivo/tview"
 )
 
@@ -41,9 +43,9 @@ func New() *StatusView {
 }
 
 func (l *StatusView) Start() {
-	l.updateData()
-
 	go func() {
+		l.updateData()
+
 		for {
 			select {
 			case <-l.stopped:
@@ -74,6 +76,33 @@ func (l *StatusView) updateData() {
 					HTTPStatus: resp.StatusCode,
 				}
 			}
+		case "ping":
+			pinger, err := ping.NewPinger(target.Host)
+			if err != nil {
+				log.Fatal().Err(err).Msgf("Failed to create pinger, latency won't be displayed")
+				return
+			}
+
+			pinger.SetPrivileged(false)
+			pinger.Count = 1
+
+			ctx, cancel := context.WithTimeout(context.Background(), time.Second)
+			defer cancel()
+
+			err = pinger.RunWithContext(ctx)
+			if err != nil {
+				l.data[i] = StatusEntry{
+					Target: target,
+					Online: false,
+				}
+			} else {
+				stats := pinger.Statistics()
+				l.data[i] = StatusEntry{
+					Target:      target,
+					Online:      stats.PacketLoss == 0,
+					PingLatency: stats.AvgRtt,
+				}
+			}
 		default:
 			log.Error().Msgf("Unknown status target type %s", target.Type)
 		}
@@ -98,6 +127,8 @@ func (l *StatusView) Update() error {
 		extraInfo := "unreachable"
 		if entry.HTTPStatus != 0 {
 			extraInfo = fmt.Sprintf("HTTP %d", entry.HTTPStatus)
+		} else if entry.PingLatency != 0 {
+			extraInfo = fmt.Sprintf("%.1fms", float64(entry.PingLatency.Microseconds())/1000)
 		}
 
 		l.view.AddItem(
