@@ -48,11 +48,11 @@ type ForecastWeatherData struct {
 func getCurrentWeatherData() (CurrentWeatherData, error) {
 	url := fmt.Sprintf(
 		"https://api.openweathermap.org/data/2.5/weather?lat=%f&lon=%f&appid=%s&units=%s&lang=%s",
-		config.K.Float64("views.weather.owm_lat"),
-		config.K.Float64("views.weather.owm_lon"),
-		config.K.String("views.weather.owm_api_key"),
-		config.K.String("views.weather.owm_unit"),
-		config.K.String("views.weather.owm_language"),
+		config.K.Float64("widgets.weather.owm_lat"),
+		config.K.Float64("widgets.weather.owm_lon"),
+		config.K.String("widgets.weather.owm_api_key"),
+		config.K.String("widgets.weather.owm_unit"),
+		config.K.String("widgets.weather.owm_language"),
 	)
 
 	resp, err := http.Get(url)
@@ -71,11 +71,11 @@ func getCurrentWeatherData() (CurrentWeatherData, error) {
 func getWeatherForecast() (ForecastWeatherData, error) {
 	url := fmt.Sprintf(
 		"https://api.openweathermap.org/data/2.5/forecast?lat=%f&lon=%f&appid=%s&units=%s&lang=%s",
-		config.K.Float64("views.weather.owm_lat"),
-		config.K.Float64("views.weather.owm_lon"),
-		config.K.String("views.weather.owm_api_key"),
-		config.K.String("views.weather.owm_unit"),
-		config.K.String("views.weather.owm_language"),
+		config.K.Float64("widgets.weather.owm_lat"),
+		config.K.Float64("widgets.weather.owm_lon"),
+		config.K.String("widgets.weather.owm_api_key"),
+		config.K.String("widgets.weather.owm_unit"),
+		config.K.String("widgets.weather.owm_language"),
 	)
 
 	resp, err := http.Get(url)

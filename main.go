@@ -8,10 +8,10 @@ import (
 
 	"github.com/merlinfuchs/blimp/internal"
 	"github.com/merlinfuchs/blimp/internal/config"
-	"github.com/merlinfuchs/blimp/internal/views/feeds"
-	"github.com/merlinfuchs/blimp/internal/views/latency"
-	"github.com/merlinfuchs/blimp/internal/views/status"
-	"github.com/merlinfuchs/blimp/internal/views/weather"
+	"github.com/merlinfuchs/blimp/internal/widgets/feeds"
+	"github.com/merlinfuchs/blimp/internal/widgets/latency"
+	"github.com/merlinfuchs/blimp/internal/widgets/status"
+	"github.com/merlinfuchs/blimp/internal/widgets/weather"
 	"github.com/rivo/tview"
 )
 
@@ -20,7 +20,7 @@ func main() {
 
 	app := tview.NewApplication()
 
-	views := map[string]internal.View{
+	widgets := map[string]internal.Widget{
 		"latency": latency.New(),
 		"status":  status.New(),
 		"weather": weather.New(),
@@ -47,7 +47,7 @@ func main() {
 		SetRows(rowValues...).
 		SetColumns(colValues...)
 
-	for viewName, view := range views {
+	for viewName, view := range widgets {
 		found := false
 
 		minRow := -1
@@ -96,7 +96,7 @@ func main() {
 				AddText(now.Format("Monday, January 2, 2006"), true, tview.AlignCenter, tcell.ColorDimGray)
 
 			app.QueueUpdateDraw(func() {
-				for _, view := range views {
+				for _, view := range widgets {
 					view.Update()
 				}
 			})

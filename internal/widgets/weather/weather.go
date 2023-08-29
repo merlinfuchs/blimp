@@ -6,7 +6,7 @@ import (
 
 	"github.com/gdamore/tcell/v2"
 	"github.com/merlinfuchs/blimp/internal/config"
-	"github.com/merlinfuchs/blimp/internal/views/weather/icons"
+	"github.com/merlinfuchs/blimp/internal/widgets/weather/icons"
 	"github.com/rivo/tview"
 	"github.com/rs/zerolog/log"
 )
@@ -48,7 +48,7 @@ func (l *StatusView) Start() {
 			select {
 			case <-l.stopped:
 				break
-			case <-time.After(time.Duration(config.K.Int("views.weather.update_interval")) * time.Millisecond):
+			case <-time.After(time.Duration(config.K.Int("widgets.weather.update_interval")) * time.Millisecond):
 				l.updateData()
 			}
 		}
@@ -79,7 +79,7 @@ func (l *StatusView) updateView() error {
 	l.view.Clear()
 
 	unitText := ""
-	switch config.K.String("views.weather.owm_unit") {
+	switch config.K.String("widgets.weather.owm_unit") {
 	case "metric":
 		unitText = "°C"
 	case "imperial":

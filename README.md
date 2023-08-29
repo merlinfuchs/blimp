@@ -27,7 +27,7 @@ The app will look for a configuration file called `blimp.toml`. Here is an examp
 
 ```toml
 # The layout is based on a grid, you can add rows and columns or remove some widgets
-# On smaller screens you probably don't want to cramp everything in, so remove the views that you don't need
+# On smaller screens you probably don't want to cramp everything in, so remove the widgets that you don't need
 layout = [
     ["weather", "weather"],
     ["weather", "weather"],
@@ -35,34 +35,34 @@ layout = [
     ["latency", "status"]
 ]
 
-[[views.status.targets]]
+[[widgets.status.targets]]
 name = "Xenon Bot"
 type = "https"
 host = "xenon.bot"
 
-[[views.status.targets]]
+[[widgets.status.targets]]
 name = "Embed Generator"
 type = "https"
 host = "message.style"
 
-[[views.status.targets]]
+[[widgets.status.targets]]
 name = "Friendly Captcha API"
 type = "https"
 host = "eu-api.friendlycaptcha.eu"
 
-[[views.status.targets]]
+[[widgets.status.targets]]
 name = "Google DNS"
 type = "ping"
 host = "8.8.8.8"
 
-[views.weather]
+[widgets.weather]
 # You openweathermap.org API key
 owm_api_key = ""
 # The latitude and longitude of the weather location
 owm_lat = 51.33
 owm_lon = 12.37
 
-[[views.feeds.targets]]
+[[widgets.feeds.targets]]
 url = "https://hnrss.org/newest"
 ```
 

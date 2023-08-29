@@ -7,20 +7,20 @@ layout = [
     ["latency", "status"]
 ]
 
-[views.latency]
+[widgets.latency]
 update_interval = 500 # 0.5 seconds
 history_length = 25
 target_host = "www.google.com"
 
-[views.status]
+[widgets.status]
 update_interval = 10000 # 10 seconds
 
-[views.weather]
+[widgets.weather]
 update_interval = 600000 # 10 minutes
 owm_language = "en"
 owm_unit = "metric"
 
-[views.feeds]
+[widgets.feeds]
 update_interval = 60000 # 1 minutes
 max_items = 0 # 0 means auto
 show_feed_title = true

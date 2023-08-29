@@ -2,7 +2,7 @@ package internal
 
 import "github.com/rivo/tview"
 
-type View interface {
+type Widget interface {
 	Start()
 	Stop()
 	Update() error

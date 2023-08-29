@@ -23,7 +23,7 @@ type StatusView struct {
 
 func New() *StatusView {
 	targets := make([]StatusTarget, 0)
-	if err := config.K.Unmarshal("views.status.targets", &targets); err != nil {
+	if err := config.K.Unmarshal("widgets.status.targets", &targets); err != nil {
 		log.Panic().Err(err).Msgf("Failed to unmarshal status targets")
 	}
 
@@ -50,7 +50,7 @@ func (l *StatusView) Start() {
 			select {
 			case <-l.stopped:
 				break
-			case <-time.After(time.Duration(config.K.Int("views.status.update_interval")) * time.Millisecond):
+			case <-time.After(time.Duration(config.K.Int("widgets.status.update_interval")) * time.Millisecond):
 				l.updateData()
 			}
 		}
