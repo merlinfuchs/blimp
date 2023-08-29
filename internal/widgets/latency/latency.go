@@ -54,9 +54,14 @@ func (l *LatencyView) Start() {
 		}
 
 		for {
-			err = pinger.Run()
-			if err != nil {
-				log.Error().Err(err).Msgf("Failed to run pinger, latency won't be displayed")
+			select {
+			case <-l.stopped:
+				return
+			default:
+				err = pinger.Run()
+				if err != nil {
+					log.Error().Err(err).Msgf("Failed to run pinger, latency won't be displayed")
+				}
 			}
 		}
 	}()

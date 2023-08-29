@@ -49,7 +49,7 @@ func (l *StatusView) Start() {
 		for {
 			select {
 			case <-l.stopped:
-				break
+				return
 			case <-time.After(time.Duration(config.K.Int("widgets.status.update_interval")) * time.Millisecond):
 				l.updateData()
 			}
