@@ -102,13 +102,26 @@ func (l *StatusView) updateView() error {
 		sunset := time.Unix(int64(l.currentWeather.Sys.Sunset), 0).Format("15:04")
 		sunrise := time.Unix(int64(l.currentWeather.Sys.Sunrise), 0).Format("15:04")
 
+		maxTemperature := l.currentWeather.Main.TempMax
+		minTemperature := l.currentWeather.Main.TempMin
+		if l.forecastWeather != nil {
+			for _, entry := range l.forecastWeather.List {
+				if entry.Main.TempMax > maxTemperature {
+					maxTemperature = entry.Main.TempMax
+				}
+				if entry.Main.TempMin < minTemperature {
+					minTemperature = entry.Main.TempMin
+				}
+			}
+		}
+
 		table := tview.NewTable().
 			SetCell(0, 0, tview.NewTableCell("Current Temperature").SetExpansion(1)).
 			SetCell(0, 1, tview.NewTableCell(fmt.Sprintf("%.1f %s", l.currentWeather.Main.Temp, unitText)).SetTextColor(tcell.ColorBlue)).
 			SetCell(1, 0, tview.NewTableCell("Max Temperature").SetExpansion(1)).
-			SetCell(1, 1, tview.NewTableCell(fmt.Sprintf("%.1f %s", l.currentWeather.Main.TempMax, unitText)).SetTextColor(tcell.ColorBlue)).
+			SetCell(1, 1, tview.NewTableCell(fmt.Sprintf("%.1f %s", maxTemperature, unitText)).SetTextColor(tcell.ColorBlue)).
 			SetCell(2, 0, tview.NewTableCell("Min Temperature").SetExpansion(1)).
-			SetCell(2, 1, tview.NewTableCell(fmt.Sprintf("%.1f %s", l.currentWeather.Main.TempMin, unitText)).SetTextColor(tcell.ColorBlue)).
+			SetCell(2, 1, tview.NewTableCell(fmt.Sprintf("%.1f %s", minTemperature, unitText)).SetTextColor(tcell.ColorBlue)).
 			SetCell(3, 0, tview.NewTableCell("Sunrise").SetExpansion(1)).
 			SetCell(3, 1, tview.NewTableCell(fmt.Sprintf("%s", sunrise)).SetTextColor(tcell.ColorBlue)).
 			SetCell(4, 0, tview.NewTableCell("Sunset").SetExpansion(1)).
