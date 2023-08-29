@@ -8,6 +8,7 @@ import (
 
 	"github.com/merlinfuchs/blimp/internal"
 	"github.com/merlinfuchs/blimp/internal/config"
+	"github.com/merlinfuchs/blimp/internal/views/feeds"
 	"github.com/merlinfuchs/blimp/internal/views/latency"
 	"github.com/merlinfuchs/blimp/internal/views/status"
 	"github.com/merlinfuchs/blimp/internal/views/weather"
@@ -23,6 +24,7 @@ func main() {
 		"latency": latency.New(),
 		"status":  status.New(),
 		"weather": weather.New(),
+		"feeds":   feeds.New(),
 	}
 
 	layout := make([][]string, 0)

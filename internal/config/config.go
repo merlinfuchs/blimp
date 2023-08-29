@@ -1,6 +1,7 @@
 package config
 
 import (
+	"errors"
 	"os"
 	"strings"
 
@@ -30,7 +31,9 @@ func InitConfig() {
 	setupDefaults()
 
 	if err := K.Load(file.Provider(configName), toml.Parser()); err != nil {
-		log.Panic().Err(err).Msgf("Failed to load config file %s", configName)
+		if !errors.Is(err, os.ErrNotExist) {
+			log.Panic().Err(err).Msgf("Failed to load config file %s", configName)
+		}
 	}
 
 	if err := K.Load(env.Provider(envVarPrefix, ".", func(s string) string {

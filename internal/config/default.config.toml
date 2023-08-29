@@ -1,9 +1,9 @@
 update_interval = 250
 
 layout = [
-    ["weather", "weather", "weather", "weather", "weather", "weather"],
-    ["weather", "weather", "weather", "weather", "weather", "weather"],
-    ["latency", "latency", "latency", "status", "status", "status"]
+    ["weather", "weather"],
+    ["weather", "weather"],
+    ["latency", "status"]
 ]
 
 [views.latency]
@@ -18,3 +18,9 @@ update_interval = 10000 # 10 seconds
 update_interval = 600000 # 10 minutes
 owm_language = "en"
 owm_unit = "metric"
+
+[views.feeds]
+update_interval = 60000 # 1 minutes
+max_items = 0
+show_feed_title = true
+show_published_time = true

@@ -13,6 +13,6 @@ var defaultConfigTomlBytes []byte
 
 func setupDefaults() {
 	if err := K.Load(rawbytes.Provider(defaultConfigTomlBytes), toml.Parser()); err != nil {
-		log.Panic().Err(err).Msgf("Failed to load config file %s", configName)
+		log.Panic().Err(err).Msgf("Failed to load default config")
 	}
 }

@@ -41,9 +41,9 @@ func New() *StatusView {
 }
 
 func (l *StatusView) Start() {
-	l.updateData()
-
 	go func() {
+		l.updateData()
+
 		for {
 			select {
 			case <-l.stopped:
