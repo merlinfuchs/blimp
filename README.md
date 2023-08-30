@@ -23,27 +23,11 @@ blimp
 
 ## Configuration
 
-The app will look for a configuration file called `blimp.toml`. Here is an example configuration for the example above:
+The app will look for a configuration file called `blimp.toml`. Blimp comes with pretty good defaults but you can adjust everything how you want.
+
+### Configure the widgets
 
 ```toml
-# The layout is based on a grid, you can add rows and columns or remove some widgets
-# On smaller screens you probably don't want to cramp everything in, so remove the widgets that you don't need
-[[pages]]
-layout = [
-    ["weather", "weather"],
-    ["weather", "weather"],
-    ["feeds", "feeds"],
-    ["latency", "status"]
-]
-
-[[pages]]
-layout = [
-    ["feeds", "feeds"],
-    ["feeds", "feeds"],
-    ["feeds", "feeds"],
-    ["latency", "status"]
-]
-
 [[widgets.status.targets]]
 name = "Xenon Bot"
 type = "https"
@@ -75,4 +59,46 @@ owm_lon = 12.37
 url = "https://hnrss.org/newest"
 ```
 
+## Configure the layout
+
+Blimp supports multiple pages that it switches between on an interval. Each page can have a distinct grid layout with different widgets. If you don't want blimp to switch between pages, only define one page.
+
+```toml
+# How fast do you want blimp to switch between pages
+page_interval = 30000 # 30 seconds is the default
+
+# Your first page
+[[pages]]
+layout = [
+    ["weather", "weather"],
+    ["weather", "weather"],
+    ["feeds", "feeds"],
+    ["latency", "status"]
+]
+
+# Your second page
+[[pages]]
+layout = [
+    ["feeds", "feeds"],
+    ["feeds", "feeds"],
+    ["feeds", "feeds"],
+    ["latency", "status"]
+]
+
+# Your third page
+[[pages]]
+...
+```
+
 Look at the [default config](internal/config/default.config.toml) for other values you can override.
+
+## Logging
+
+Because logging to STDOUT is pointless because STDOUT is already used for the UI output, you can find log messages in a file called `blimp.log`.
+
+If you want blimp to write to a different logfile you can set it in the config like this:
+
+```toml
+[logging]
+filename = "blimp.log"
+```
