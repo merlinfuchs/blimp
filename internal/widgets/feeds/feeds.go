@@ -23,7 +23,7 @@ type FeedsView struct {
 
 func New() *FeedsView {
 	targets := make([]FeedTarget, 0)
-	if err := config.K.Unmarshal("views.feeds.targets", &targets); err != nil {
+	if err := config.K.Unmarshal("widgets.feeds.targets", &targets); err != nil {
 		log.Panic().Err(err).Msgf("Failed to unmarshal status targets")
 	}
 
@@ -49,7 +49,7 @@ func (l *FeedsView) Start() {
 			select {
 			case <-l.stopped:
 				return
-			case <-time.After(time.Duration(config.K.Int("views.feeds.update_interval")) * time.Millisecond):
+			case <-time.After(time.Duration(config.K.Int("widgets.feeds.update_interval")) * time.Millisecond):
 				l.updateItems()
 			}
 		}
@@ -99,7 +99,7 @@ func (l *FeedsView) Update() error {
 	l.view.Clear()
 
 	items := l.items
-	maxItems := config.K.Int("views.feeds.max_items")
+	maxItems := config.K.Int("widgets.feeds.max_items")
 	if maxItems == 0 {
 		_, _, _, height := l.view.GetRect()
 		maxItems = height - 4
@@ -111,14 +111,14 @@ func (l *FeedsView) Update() error {
 
 	for _, item := range items {
 		text := "[gray]-"
-		if config.K.Bool("views.feeds.show_published_time") {
+		if config.K.Bool("widgets.feeds.show_published_time") {
 			published := item.Item.PublishedParsed
 			if published != nil {
 				text += fmt.Sprintf(" [yellowgreen]%s", published.Format("2006-01-02 15:04"))
 			}
 		}
 
-		if config.K.Bool("views.feeds.show_feed_title") {
+		if config.K.Bool("widgets.feeds.show_feed_title") {
 			text += fmt.Sprintf(" [gray]%s", item.Feed.Title)
 		}
 

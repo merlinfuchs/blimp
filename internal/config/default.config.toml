@@ -1,5 +1,7 @@
-update_interval = 250
+update_interval = 250 # 250 ms
+page_interval = 30000 # 30 seconds
 
+[[pages]]
 layout = [
     ["weather", "weather"],
     ["weather", "weather"],
@@ -7,21 +9,34 @@ layout = [
     ["latency", "status"]
 ]
 
-[views.latency]
+[[pages]]
+layout = [
+    ["feeds", "feeds"],
+    ["feeds", "feeds"],
+    ["latency", "status"]
+]
+
+[widgets.latency]
 update_interval = 500 # 0.5 seconds
 history_length = 25
 target_host = "www.google.com"
 
-[views.status]
+[widgets.status]
 update_interval = 10000 # 10 seconds
 
-[views.weather]
+[widgets.weather]
 update_interval = 600000 # 10 minutes
 owm_language = "en"
 owm_unit = "metric"
 
-[views.feeds]
+[widgets.feeds]
 update_interval = 60000 # 1 minutes
 max_items = 0 # 0 means auto
 show_feed_title = true
 show_published_time = true
+
+[logging]
+filename = "blimp.log"
+max_size = 1 # in MB
+max_age = 7 # in days
+max_backups = 5 # // note: old ones will still be deleted after max_age

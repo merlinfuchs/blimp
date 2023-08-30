@@ -27,13 +27,13 @@ func New() *LatencyView {
 
 	return &LatencyView{
 		stopped: make(chan struct{}),
-		data:    make([]float64, config.K.Int("views.latency.history_length")),
+		data:    make([]float64, config.K.Int("widgets.latency.history_length")),
 		view:    textView,
 	}
 }
 
 func (l *LatencyView) Start() {
-	pinger, err := ping.NewPinger(config.K.String("views.latency.target_host"))
+	pinger, err := ping.NewPinger(config.K.String("widgets.latency.target_host"))
 	if err != nil {
 		log.Fatal().Err(err).Msgf("Failed to create pinger, latency won't be displayed")
 		return
@@ -46,7 +46,7 @@ func (l *LatencyView) Start() {
 
 	go func() {
 		pinger.SetPrivileged(false)
-		pinger.Interval = time.Duration(config.K.Int("views.latency.update_interval")) * time.Millisecond
+		pinger.Interval = time.Duration(config.K.Int("widgets.latency.update_interval")) * time.Millisecond
 
 		pinger.OnRecv = func(pkt *ping.Packet) {
 			newValue := float64(pkt.Rtt.Microseconds()) / 1000
@@ -54,9 +54,14 @@ func (l *LatencyView) Start() {
 		}
 
 		for {
-			err = pinger.Run()
-			if err != nil {
-				log.Error().Err(err).Msgf("Failed to run pinger, latency won't be displayed")
+			select {
+			case <-l.stopped:
+				return
+			default:
+				err = pinger.Run()
+				if err != nil {
+					log.Error().Err(err).Msgf("Failed to run pinger, latency won't be displayed")
+				}
 			}
 		}
 	}()
