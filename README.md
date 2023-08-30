@@ -6,11 +6,12 @@ _I built this to run on a RaspberryPi Zero inside a Macintosh 1 on my shelf to q
 
 ![Example](example.png)
 
-## Features
+## Widgets
 
 - **Weather**: Display current weather information and forecast
 - **Network Latency**: Display a live chart of the network latency / ping
 - **Application Status**: Monitor the status of web applications
+- **RSS, Atom & JSON Feeds**: Display the most recent items from multiple feeds
 
 ## Installation
 
