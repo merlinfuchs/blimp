@@ -73,7 +73,6 @@ page_interval = 30000 # 30 seconds is the default
 layout = [
     ["weather", "weather"],
     ["weather", "weather"],
-    ["feeds", "feeds"],
     ["latency", "status"]
 ]
 
