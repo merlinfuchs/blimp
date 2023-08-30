@@ -28,9 +28,18 @@ The app will look for a configuration file called `blimp.toml`. Here is an examp
 ```toml
 # The layout is based on a grid, you can add rows and columns or remove some widgets
 # On smaller screens you probably don't want to cramp everything in, so remove the widgets that you don't need
+[[pages]]
 layout = [
     ["weather", "weather"],
     ["weather", "weather"],
+    ["feeds", "feeds"],
+    ["latency", "status"]
+]
+
+[[pages]]
+layout = [
+    ["feeds", "feeds"],
+    ["feeds", "feeds"],
     ["feeds", "feeds"],
     ["latency", "status"]
 ]
