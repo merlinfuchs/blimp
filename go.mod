@@ -13,8 +13,6 @@ require (
 	github.com/mmcdole/gofeed v1.2.1
 	github.com/prometheus-community/pro-bing v0.3.0
 	github.com/rivo/tview v0.0.0-20230826141931-7344139b5532
-	github.com/rs/zerolog v1.30.0
-	gopkg.in/natefinch/lumberjack.v2 v2.2.1
 )
 
 require (
@@ -26,8 +24,6 @@ require (
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/knadh/koanf/maps v0.1.1 // indirect
 	github.com/lucasb-eyer/go-colorful v1.2.0 // indirect
-	github.com/mattn/go-colorable v0.1.12 // indirect
-	github.com/mattn/go-isatty v0.0.14 // indirect
 	github.com/mattn/go-runewidth v0.0.14 // indirect
 	github.com/mitchellh/copystructure v1.2.0 // indirect
 	github.com/mitchellh/mapstructure v1.5.0 // indirect

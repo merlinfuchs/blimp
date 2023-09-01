@@ -4,11 +4,12 @@ import (
 	"fmt"
 	"time"
 
+	"log/slog"
+
 	"github.com/gdamore/tcell/v2"
 	"github.com/merlinfuchs/blimp/internal/config"
 	"github.com/merlinfuchs/blimp/internal/widgets/weather/icons"
 	"github.com/rivo/tview"
-	"github.com/rs/zerolog/log"
 )
 
 type StatusView struct {
@@ -60,14 +61,14 @@ func (l *StatusView) updateData() {
 
 	currentWeather, err := getCurrentWeatherData()
 	if err != nil {
-		log.Error().Err(err).Msgf("Failed to get current weather data")
+		slog.With("error", err).Error("Failed to get current weather data", "error")
 		return
 	}
 	l.currentWeather = &currentWeather
 
 	forecastWeather, err := getWeatherForecast()
 	if err != nil {
-		log.Error().Err(err).Msgf("Failed to get forecast weather data")
+		slog.With("error", err).Error("Failed to get weather forecast data")
 		return
 	}
 	l.forecastWeather = &forecastWeather

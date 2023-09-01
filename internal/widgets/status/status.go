@@ -3,10 +3,9 @@ package status
 import (
 	"context"
 	"fmt"
+	"log/slog"
 	"net/http"
 	"time"
-
-	"github.com/rs/zerolog/log"
 
 	"github.com/gdamore/tcell/v2"
 	"github.com/merlinfuchs/blimp/internal/config"
@@ -24,7 +23,8 @@ type StatusView struct {
 func New() *StatusView {
 	targets := make([]StatusTarget, 0)
 	if err := config.K.Unmarshal("widgets.status.targets", &targets); err != nil {
-		log.Panic().Err(err).Msgf("Failed to unmarshal status targets")
+		slog.With("error", err).Error("Failed to unmarshal status targets")
+		panic(err)
 	}
 
 	view := tview.NewFlex().SetDirection(tview.FlexRow)
@@ -79,8 +79,8 @@ func (l *StatusView) updateData() {
 		case "ping":
 			pinger, err := ping.NewPinger(target.Host)
 			if err != nil {
-				log.Fatal().Err(err).Msgf("Failed to create pinger, latency won't be displayed")
-				return
+				slog.With("error", err).Error("Failed to create pinger, latency won't be displayed")
+				panic(err)
 			}
 
 			pinger.SetPrivileged(false)
@@ -104,7 +104,7 @@ func (l *StatusView) updateData() {
 				}
 			}
 		default:
-			log.Error().Msgf("Unknown status target type %s", target.Type)
+			slog.Error(fmt.Sprintf("Unknown status target type %s", target.Type))
 		}
 	}
 }

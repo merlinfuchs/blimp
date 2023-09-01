@@ -94,11 +94,10 @@ Look at the [default config](internal/config/default.config.toml) for other valu
 
 ## Logging
 
-Because logging to STDOUT is pointless because STDOUT is already used for the UI output, you can find log messages in a file called `blimp.log`.
+Blimp will log errors and warning to STDERR. Because STDOUT is already used for the UI it can be hard to spot the errors.
 
-If you want blimp to write to a different logfile you can set it in the config like this:
+To be able to see the log messages you can redirect the STDERR output to a file:
 
-```toml
-[logging]
-filename = "blimp.log"
+```shell
+blimp 2>> blimp.log
 ```

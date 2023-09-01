@@ -3,12 +3,13 @@ package latency
 import (
 	"time"
 
+	"log/slog"
+
 	"github.com/gdamore/tcell/v2"
 	"github.com/guptarohit/asciigraph"
 	"github.com/merlinfuchs/blimp/internal/config"
 	ping "github.com/prometheus-community/pro-bing"
 	"github.com/rivo/tview"
-	"github.com/rs/zerolog/log"
 )
 
 type LatencyView struct {
@@ -51,7 +52,7 @@ func (l *LatencyView) Start() {
 				var err error
 				pinger, err = ping.NewPinger(config.K.String("widgets.latency.target_host"))
 				if err != nil {
-					log.Error().Err(err).Msgf("Failed to create pinger")
+					slog.With("error", err).Error("Failed to create pinger")
 					return
 				}
 
@@ -65,7 +66,7 @@ func (l *LatencyView) Start() {
 
 				err = pinger.Run()
 				if err != nil {
-					log.Error().Err(err).Msgf("Failed to run pinger, latency won't be displayed")
+					slog.With("error", err).Error("Failed to run pinger, latency won't be displayed")
 				}
 			}
 		}

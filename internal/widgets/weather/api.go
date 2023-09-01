@@ -60,6 +60,10 @@ func getCurrentWeatherData() (CurrentWeatherData, error) {
 		return CurrentWeatherData{}, fmt.Errorf("Failed to get weather data, %w", err)
 	}
 
+	if resp.StatusCode >= 300 || resp.StatusCode < 200 {
+		return CurrentWeatherData{}, fmt.Errorf("Failed to get current weather data, status code %d", resp.StatusCode)
+	}
+
 	var data CurrentWeatherData
 	if err := json.NewDecoder(resp.Body).Decode(&data); err != nil {
 		return CurrentWeatherData{}, fmt.Errorf("Failed to decode weather data, %w", err)
@@ -81,6 +85,10 @@ func getWeatherForecast() (ForecastWeatherData, error) {
 	resp, err := http.Get(url)
 	if err != nil {
 		return ForecastWeatherData{}, fmt.Errorf("Failed to get weather data, %w", err)
+	}
+
+	if resp.StatusCode >= 300 || resp.StatusCode < 200 {
+		return ForecastWeatherData{}, fmt.Errorf("Failed to get weather forecast data, status code %d", resp.StatusCode)
 	}
 
 	var data ForecastWeatherData

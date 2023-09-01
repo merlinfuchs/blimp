@@ -33,9 +33,3 @@ update_interval = 60000 # 1 minutes
 max_items = 0 # 0 means auto
 show_feed_title = true
 show_published_time = true
-
-[logging]
-filename = "blimp.log"
-max_size = 1 # in MB
-max_age = 7 # in days
-max_backups = 5 # // note: old ones will still be deleted after max_age

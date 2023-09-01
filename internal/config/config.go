@@ -2,14 +2,16 @@ package config
 
 import (
 	"errors"
+	"fmt"
 	"os"
 	"strings"
+
+	"log/slog"
 
 	"github.com/knadh/koanf/parsers/toml"
 	"github.com/knadh/koanf/providers/env"
 	"github.com/knadh/koanf/providers/file"
 	"github.com/knadh/koanf/v2"
-	"github.com/rs/zerolog/log"
 )
 
 var K = koanf.New(".")
@@ -32,7 +34,8 @@ func InitConfig() {
 
 	if err := K.Load(file.Provider(configName), toml.Parser()); err != nil {
 		if !errors.Is(err, os.ErrNotExist) {
-			log.Panic().Err(err).Msgf("Failed to load config file %s", configName)
+			slog.With("error", err).Error(fmt.Sprintf("Failed to load config file %s", configName))
+			panic(err)
 		}
 	}
 
@@ -40,6 +43,7 @@ func InitConfig() {
 		return strings.Replace(strings.ToLower(
 			strings.TrimPrefix(s, envVarPrefix)), "_", ".", -1)
 	}), nil); err != nil {
-		log.Panic().Err(err).Msgf("Failed to load env vars")
+		slog.With("error", err).Error("Failed to load config from environment")
+		panic(err)
 	}
 }

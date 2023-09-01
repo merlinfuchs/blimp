@@ -3,10 +3,11 @@ package main
 import (
 	"fmt"
 
+	"log/slog"
+
 	"github.com/merlinfuchs/blimp/internal"
 	"github.com/merlinfuchs/blimp/internal/config"
 	"github.com/merlinfuchs/blimp/internal/logging"
-	"github.com/rs/zerolog/log"
 )
 
 var outDatedConfigKeys = []string{
@@ -27,6 +28,6 @@ func main() {
 
 	err := internal.AppEntry()
 	if err != nil {
-		log.Fatal().Err(err).Msg("Failed to start app")
+		slog.With("error", err).Error("Failed to start blimp")
 	}
 }

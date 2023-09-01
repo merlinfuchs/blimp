@@ -3,11 +3,11 @@ package feeds
 import (
 	"context"
 	"fmt"
+	"log/slog"
 	"sort"
 	"time"
 
 	"github.com/mmcdole/gofeed"
-	"github.com/rs/zerolog/log"
 
 	"github.com/gdamore/tcell/v2"
 	"github.com/merlinfuchs/blimp/internal/config"
@@ -24,7 +24,8 @@ type FeedsView struct {
 func New() *FeedsView {
 	targets := make([]FeedTarget, 0)
 	if err := config.K.Unmarshal("widgets.feeds.targets", &targets); err != nil {
-		log.Panic().Err(err).Msgf("Failed to unmarshal status targets")
+		slog.With("error", err).Error("Failed to unmarshal status targets")
+		panic(err)
 	}
 
 	view := tview.NewFlex().SetDirection(tview.FlexRow)
@@ -66,7 +67,7 @@ func (l *FeedsView) updateItems() {
 
 		feed, err := fp.ParseURLWithContext(target.URL, ctx)
 		if err != nil {
-			log.Error().Err(err).Msgf("Failed to fetch feed %s", target.URL)
+			slog.With("error", err).Error("Failed to fetch feed", "url", target.URL)
 			continue
 		}
 
@@ -82,7 +83,7 @@ func (l *FeedsView) updateItems() {
 		publishedI := items[i].Item.PublishedParsed
 		publishedJ := items[j].Item.PublishedParsed
 		if publishedI == nil || publishedJ == nil {
-			log.Warn().Msgf("Failed to sort feeds, missing published date")
+			slog.Warn("Failed to sort feeds, missing published date")
 			return true
 		}
 		return publishedI.After(*publishedJ)
