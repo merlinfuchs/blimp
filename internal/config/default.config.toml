@@ -33,3 +33,6 @@ update_interval = 60000 # 1 minutes
 max_items = 0 # 0 means auto
 show_feed_title = true
 show_published_time = true
+
+[widgets.transit]
+here_radius = 500
