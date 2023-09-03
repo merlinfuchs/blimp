@@ -9,6 +9,7 @@ import (
 	"github.com/merlinfuchs/blimp/internal/widgets/feeds"
 	"github.com/merlinfuchs/blimp/internal/widgets/latency"
 	"github.com/merlinfuchs/blimp/internal/widgets/status"
+	"github.com/merlinfuchs/blimp/internal/widgets/transit"
 	"github.com/merlinfuchs/blimp/internal/widgets/weather"
 	"github.com/rivo/tview"
 )
@@ -21,6 +22,7 @@ func AppEntry() error {
 		"status":  status.New(),
 		"weather": weather.New(),
 		"feeds":   feeds.New(),
+		"transit": transit.New(),
 	}
 
 	pages, err := parsePagesFromConfig()

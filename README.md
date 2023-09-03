@@ -12,6 +12,7 @@ _I built this to run on a RaspberryPi Zero inside a Macintosh 1 on my shelf to q
 - **Network Latency**: Display a live chart of the network latency / ping
 - **Application Status**: Monitor the status of web applications
 - **RSS, Atom & JSON Feeds**: Display the most recent items from multiple feeds
+- **Public transit next departures**: Dispaly the next departures from public transit stations nearby
 
 ## Installation
 
@@ -58,6 +59,15 @@ owm_lon = 12.37
 
 [[widgets.feeds.targets]]
 url = "https://hnrss.org/newest"
+
+[widgets.transit]
+# Your developer.here.com API key
+here_api_key = ""
+# The latitude and longitude of the location where blimp will look for the next public transit departures
+here_lat = 51.33
+here_lon = 12.37
+# The search radius around the coordinates in meters
+here_radius = 500
 ```
 
 ## Configure the layout
