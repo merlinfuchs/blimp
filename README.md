@@ -61,7 +61,7 @@ owm_lon = 12.37
 url = "https://hnrss.org/newest"
 
 [widgets.transit]
-# Your here.org API key
+# Your developer.here.com API key
 here_api_key = ""
 # The latitude and longitude of the location where blimp will look for the next public transit departures
 here_lat = 51.33
