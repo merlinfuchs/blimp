@@ -12,7 +12,7 @@ _I built this to run on a RaspberryPi Zero inside a Macintosh 1 on my shelf to q
 - **Network Latency**: Display a live chart of the network latency / ping
 - **Application Status**: Monitor the status of web applications
 - **RSS, Atom & JSON Feeds**: Display the most recent items from multiple feeds
-- **Public transit next departures**: Dispaly the next departures from public transit stations nearby
+- **Public transit next departures**: Display the next departures from public transit stations nearby
 
 ## Installation
 
