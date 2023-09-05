@@ -111,3 +111,9 @@ To be able to see the log messages you can redirect the STDERR output to a file:
 ```shell
 blimp 2>> blimp.log
 ```
+
+## Configure the display
+
+If you are running this on a low resolution display and aren't happy about the readability and looks, you might want to reconfigure the font and font-size of the terminal output.
+
+For example on a raspberry pi you can run `sudo dpkg-reconfigure console-setup` to change the font and font-size. For my personal setup I have found TerminusBold wiht 12x24 to have looked the best.
