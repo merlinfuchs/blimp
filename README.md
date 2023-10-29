@@ -18,7 +18,7 @@ _I built this to run on a RaspberryPi Zero inside a Macintosh 1 on my shelf to q
 
 ```shell
 # Install from GitHub
-go install github.com/merlinfuchs/blimp
+go install github.com/merlinfuchs/blimp@latest
 # Run blimp
 blimp
 ```
