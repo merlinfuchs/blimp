@@ -4,7 +4,7 @@ Customizable terminal UI for monitoring weather information, application status,
 
 _I built this to run on a RaspberryPi Zero inside a Macintosh 1 on my shelf to quickly see weather and uptime info._
 
-![](example1.png)![](example2.png)
+![Example 1](example1.png)![Example 2](example2.png)
 
 ## Widgets
 

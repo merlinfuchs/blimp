@@ -51,7 +51,7 @@ func AppEntry() error {
 
 			now := time.Now()
 			frame.
-				AddText("Blimp v0.1.0", true, tview.AlignLeft, tcell.ColorDimGray).
+				AddText("Blimp v0.4.0", true, tview.AlignLeft, tcell.ColorDimGray).
 				AddText(now.Format("15:04:05"), true, tview.AlignCenter, tcell.ColorLightGray).
 				AddText(now.Format("Monday, January 2, 2006"), true, tview.AlignCenter, tcell.ColorDimGray).
 				AddText(pages[currentPage].Title, true, tview.AlignRight, tcell.ColorDimGray)
