@@ -34,7 +34,7 @@ func (l *TransitView) Start() {
 	l.ticker = time.NewTicker(1 * time.Minute)
 	err := l.updateItems()
 	if err != nil {
-		slog.With("error", err).Error("Failed to update items")
+		slog.With("error", err).Error("Failed to update transit departure items")
 		panic(err)
 	}
 }
@@ -109,6 +109,10 @@ func (l *TransitView) updateView() error {
 	if maxItems == 0 {
 		_, _, _, height := l.view.GetRect()
 		maxItems = height - 4
+	}
+
+	if maxItems < 0 {
+		maxItems = 0
 	}
 
 	items := l.items

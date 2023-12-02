@@ -13,6 +13,7 @@ _I built this to run on a RaspberryPi Zero inside a Macintosh 1 on my shelf to q
 - **Application Status**: Monitor the status of web applications
 - **RSS, Atom & JSON Feeds**: Display the most recent items from multiple feeds
 - **Public transit next departures**: Display the next departures from public transit stations nearby
+- **Random Quotes**: Display a random quote that changes periodically
 
 ## Installation
 
@@ -92,7 +93,7 @@ layout = [
     ["feeds", "feeds"],
     ["feeds", "feeds"],
     ["feeds", "feeds"],
-    ["latency", "status"]
+    ["quotes", "status"]
 ]
 
 # Your third page

@@ -36,3 +36,7 @@ show_published_time = true
 
 [widgets.transit]
 here_radius = 500
+
+[widgets.quotes]
+update_interval = 3600000 # 1 hour
+

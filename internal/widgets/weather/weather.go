@@ -61,7 +61,7 @@ func (l *StatusView) updateData() {
 
 	currentWeather, err := getCurrentWeatherData()
 	if err != nil {
-		slog.With("error", err).Error("Failed to get current weather data", "error")
+		slog.With("error", err).Error("Failed to get current weather data")
 		return
 	}
 	l.currentWeather = &currentWeather
